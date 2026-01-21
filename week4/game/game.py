@@ -8,7 +8,7 @@ def main():
             if level <= 0:
                 continue
             else:
-                num = random.randrange(1, level)
+                num = random.randint(1, level)
                 break
         except (ValueError):
             continue
@@ -16,7 +16,7 @@ def main():
 
     while 1:
         try:
-            guass = int(input("Guass: "))
+            guass = int(input("Guess: "))
         except (ValueError):
             continue
 
