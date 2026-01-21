@@ -32,8 +32,11 @@ def main():
                         errors = 0
                         n += 1
                         break
+        elif (n == 10):
+            print(f"Score: {score}")
+            sys.exit(0)
         else:
-            sys.exit(f"Score: {score}")
+            sys.exit(0)
             
 
                         
@@ -59,7 +62,12 @@ def get_level():
 
 
 def generate_integer(level):
-    n = random.randint(0, ((level * 10) - 1))
+    if level == 1:
+        n = random.randint(0, 9)
+    elif level == 2:
+        n = random.randint(10, 99)
+    else:  # level == 3
+        n = random.randint(100, 999)
     return n
 
 
