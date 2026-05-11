@@ -1,29 +1,36 @@
-from fuel import convert, gauge
 import pytest
+from fuel import convert, gauge
 
-#convert expects a str in X/Y format as input
-def test_convert():
-    assert convert("0/4") == 0
-    assert convert("1/100") == 1
+# ======= Convert tests =======
+def test_convert_valid():
+    assert convert("1/2") == 50
     assert convert("3/4") == 75
-    assert convert("1/4") == 25
     assert convert("99/100") == 99
+    assert convert("1/100") == 1
 
-    with pytest.raises(ZeroDivisionError):
-        convert("1/0")
-        
+def test_convert_value_error_not_int():
     with pytest.raises(ValueError):
         convert("cat/dog")
+    with pytest.raises(ValueError):
+        convert("1.5/3")
+    with pytest.raises(ValueError):
+        convert("3/-1")
 
+def test_convert_value_error_bad_fraction():
+    with pytest.raises(ValueError):
+        convert("5/4")
 
+def test_convert_zero_division():
+    with pytest.raises(ZeroDivisionError):
+        convert("2/0")
 
-# gauge expects an int and returns a str that is:
-# "E" if that int is less than or equal to 1,
-# "F" if that int is greater than or equal to 99,
-# and "Z%" otherwise
-def test_gauge():
+# ======= Gauge tests =======
+def test_gauge_empty_and_full():
     assert gauge(0) == "E"
-    assert gauge(75) == "75%"
-    assert gauge(25) == "25%"
-    assert gauge(99) == "F"
     assert gauge(1) == "E"
+    assert gauge(99) == "F"
+    assert gauge(100) == "F"
+
+def test_gauge_normal_percent():
+    assert gauge(50) == "50%"
+    assert gauge(25) == "25%"

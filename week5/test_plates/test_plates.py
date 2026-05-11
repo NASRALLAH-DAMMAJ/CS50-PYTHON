@@ -1,20 +1,51 @@
 from plates import is_valid
 
 
-def test_is_valid_few():
+def test_only_letters():
+    assert is_valid("NASR") == True
+    assert is_valid("Outlas") == True
+    assert is_valid("hello world") == False
     assert is_valid("a") == False
 
-def test_is_valid_many():
-    assert is_valid("aaaaaaa") == False
 
-def test_is_valid_nums():
-    assert is_valid("111111") == False
+def test_only_numbers():
+    assert is_valid("7.866") == False
+    assert is_valid("3.14") == False
+    assert is_valid("7") == False
+    assert is_valid("23") == False
+    assert is_valid("123456") == False
+    assert is_valid("22") == False
+    assert is_valid(" 2") == False
 
-def test_is_valid_start_nums():
-    assert is_valid("11aaaa") == False
 
-def test_is_valid_num_used():
-    assert is_valid("aa11aa") == False
+def test_both():
+    assert is_valid("CS50") == True
+    assert is_valid("CS05") == False
+    assert is_valid("cs01") == False
+    assert is_valid("c6") == False
+    assert is_valid("cs") == True
+    assert is_valid("abc10") == True
+    assert is_valid("050") == False
+    assert is_valid("cs50asdaa") == False
+    assert is_valid("cs50p") == False
 
-def test_is_valid_0():
-    assert is_valid("aaa0123") == False
+    assert is_valid("AA") == True
+    assert is_valid("A3") == False
+    assert is_valid("1a") == False
+    assert is_valid("c2") == False
+    assert is_valid("1z") == False
+    assert is_valid("2A") == False
+    assert is_valid("3m") == False
+    assert is_valid("zu#lk") == False
+
+
+
+def comma():
+    assert is_valid("Ha,s") == False
+    assert is_valid("J:d,s") == False
+    assert is_valid(",.,a") == False
+    assert is_valid(" ") == False
+    assert is_valid("      ") == False
+    assert is_valid("What's up, eh?") == False
+    assert is_valid("vs,20?") == False
+

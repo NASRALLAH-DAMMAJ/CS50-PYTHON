@@ -8,6 +8,8 @@ def main():
 
 def validate(ip):
     try:
+        if len(ip.split(".")) > 4:
+            return False
         if (eq(ip, 0) and eq(ip, 1) and eq(ip, 2) and eq(ip, 3)):
             return True
         else:

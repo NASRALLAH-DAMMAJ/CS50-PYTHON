@@ -16,6 +16,8 @@ def format_time(time, abbr):
     time = time.split(":")
     if int(time[1]) >= 60:
         raise ValueError
+    if len(time[1]) > 2:
+        raise ValueError
     if len(time[0]) == 1:
         time = f'0{time[0]}:{time[1]}' if abbr == "AM" else f'{int(time[0])+12}:{time[1]}'
         return time
